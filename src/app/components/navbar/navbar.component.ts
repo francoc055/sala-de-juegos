@@ -17,5 +17,7 @@ export class NavbarComponent {
   cerrarSesion(){
     this.usersService.logOut();
     localStorage.removeItem('email');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
   }
 }

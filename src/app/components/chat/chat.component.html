@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+
+<div class="max-w-md mx-auto mt-5">
+  <div class="border border-gray-300 rounded-lg p-4">
+    <h2 class="text-xl font-bold mb-4">Chat en línea</h2>
+    <div class="overflow-y-auto max-h-80" id="conteinerMessages">
+      <div class="mb-2">
+        <div class="flex justify-center items-center">
+          <img *ngIf="chatMessages !== []" src="./../../../assets/spinner.gif" alt="spinner" class="w-5">
+        </div>
+        <div *ngFor="let chat of chatMessages" class="bg-slate-100">
+          <div class="flex items-end" [ngClass]="(chat.userId == userId) ? 'justify-end' : 'justify-start'">
+            <p class="msj flex flex-col text-white px-5 rounded-md m-2" [ngClass]="(chat.userId == userId) ? 'bg-blue-500' : 'bg-gray-400'">
+              {{chat.message}} 
+              <span class="text-xs text-right">{{chat.created_at}}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="mt-4 flex justify-center items-center relative">
+      <input [(ngModel)]="message" name="message" type="text" class="w-full border rounded-md p-2 shadow-lg focus:outline-none focus:border-gray-300 duration-200 hover:shadow-none" placeholder="Escribe un mensaje">
+      <button (click)="sendMessage()" type="submit">
+        <svg class="w-9 bg-green-400 rounded-3xl px-2 py-1 hover:bg-green-300 cursor-pointer ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/></svg>
+      </button>
+    </form>
+
+  </div>
+</div>

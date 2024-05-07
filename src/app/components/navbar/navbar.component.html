@@ -1,20 +1,16 @@
 <nav class="bg-gray-800 text-white">
   <div class="container mx-auto flex items-center justify-between px-4 py-2">
-    <!-- Icono de la app a la izquierda -->
     <img src="./../../../assets/icono-nav.png" alt="Icono" class="h-8 w-8">
     
-    <!-- Links centrados -->
     <div class="flex flex-grow justify-center space-x-4">
       <a routerLink="/home" routerLinkActive="font-bold" class="hover:text-gray-300 cursor-pointer">Home</a>
       <a routerLink="/quien-soy" routerLinkActive="font-bold" class="hover:text-gray-300 cursor-pointer">Quién Soy</a>
+      <a routerLink="/chat" routerLinkActive="font-bold" class="hover:text-gray-300 cursor-pointer">Chatear</a>
     </div>
     
-    <!-- Nombre del usuario y su icono a la derecha -->
     <div class="flex items-center space-x-2">
-      <!-- Nombre del usuario -->
       <span class="text-sm font-semibold">{{usuario}}</span>
       
-      <!-- Icono del usuario -->
       <img src="./../../../assets/usuario.png" alt="Icono Usuario" class="h-6 w-6 cursor-pointer">
       <img (click)="cerrarSesion()" src="./../../../assets/log-out.png" alt="Icono" class="h-6 w-6 cursor-pointer">
 

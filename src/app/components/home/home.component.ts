@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChatComponent } from '../chat/chat.component';
 import { AhorcadoComponent } from '../ahorcado/ahorcado.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -34,11 +35,10 @@ export class HomeComponent implements OnInit, OnDestroy{
         }
       }
       else{
-        localStorage.setItem('email', JSON.stringify(this.receivedData));
+        localStorage.setItem('email', this.receivedData);
       }
     });
-
-  }
+}
 
   ngOnDestroy(): void {
     this.dataSubscription.unsubscribe();

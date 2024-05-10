@@ -5,6 +5,7 @@ import { collection, addDoc, serverTimestamp, Firestore} from '@angular/fire/fir
 import { Usuario } from '../models/Usuario';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -29,11 +30,19 @@ export class UsersService {
     let flag = true;
     if (!usuario.email || !usuario.password) {
       console.log('Por favor ingrese un correo electrónico y una contraseña.');
+      Swal.fire({
+        text: "Por favor ingrese un correo electrónico y una contraseña.",
+        icon: "error"
+      });
       return;
     }
 
     if (usuario.password.length < 6) {
       console.log('La contraseña debe tener al menos 6 caracteres.');
+      Swal.fire({
+        text: "La contraseña debe tener al menos 6 caracteres.",
+        icon: "error"
+      });
       return;
     }
 
@@ -45,8 +54,16 @@ export class UsersService {
         console.error('Error al registrar usuario:', error);
         if (error.code === 'auth/email-already-in-use') {
           console.log('El correo electrónico ya está en uso.');
+          Swal.fire({
+            text: "El correo electrónico ya está en uso.",
+            icon: "error"
+          });
         } else {
           console.log('Ocurrió un error al registrar el usuario. Por favor, inténtelo de nuevo más tarde.');
+          Swal.fire({
+            text: "Ocurrió un error al registrar el usuario. Por favor, inténtelo de nuevo más tarde.",
+            icon: "error"
+          });
         }
       });
   }
@@ -58,9 +75,7 @@ export class UsersService {
         this.userId.next(res.user.uid);
         res.user.getIdToken()
           .then(token => {
-            // Asignar el token a una variable
             this.token = token;
-            // Navegar a la ruta home después de obtener el token
             this.router.navigate(['/home']);
           })
           .catch(err => console.error(err));
@@ -71,13 +86,21 @@ export class UsersService {
           console.log('Correo electrónico o contraseña incorrectos.')
         } else {
           console.log('Ocurrió un error al iniciar sesión. Por favor, inténtelo de nuevo más tarde.');
+          Swal.fire({
+            text: "Correo electrónico o contraseña incorrectos.",
+            icon: "error"
+          });
         }
       });
   }
   
   logOut(){
     this.auth.signOut().then(() => {
-      console.log('Sesión cerrada correctamente');
+      // console.log('Sesión cerrada correctamente');
+      Swal.fire({
+        text: "Sesión cerrada correctamente",
+        icon: "success"
+      });
       this.router.navigate(['/login']); 
     }).catch((error) => {
       console.error('Error al cerrar sesión:', error);
@@ -93,7 +116,6 @@ export class UsersService {
     addDoc(ref, logData)
     .then(res => {
       console.log(res)
-      // this.miObservable.next(usuario.email);
     })
     .catch(err => console.log(err));
   }

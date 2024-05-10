@@ -12,7 +12,6 @@ export class ChatService {
 
 
   cargarMensaje(chatMessage: ChatMessage){
-    console.log(chatMessage);
     const ref = collection(this.firestore, 'chat-messages');
     return addDoc(ref, chatMessage)
   }

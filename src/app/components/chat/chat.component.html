@@ -6,10 +6,14 @@
     <div class="overflow-y-auto max-h-80" id="conteinerMessages">
       <div class="mb-2">
         <div class="flex justify-center items-center">
-          <img *ngIf="chatMessages !== []" src="./../../../assets/spinner.gif" alt="spinner" class="w-5">
+          <img *ngIf="chatMessages.length == 0" src="./../../../assets/spinner.gif" alt="spinner" class="w-5">
         </div>
         <div *ngFor="let chat of chatMessages" class="bg-slate-100">
           <div class="flex items-end" [ngClass]="(chat.userId == userId) ? 'justify-end' : 'justify-start'">
+            <div *ngIf="chat.userId !== userId" class="text-neutral-700 border rounded-xl px-1 bg-neutral-200">
+              {{chat.email.replace('@gmail.com', '')}}
+            </div>
+          
             <p class="msj flex flex-col text-white px-5 rounded-md m-2" [ngClass]="(chat.userId == userId) ? 'bg-blue-500' : 'bg-gray-400'">
               {{chat.message}} 
               <span class="text-xs text-right">{{chat.created_at}}</span>

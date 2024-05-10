@@ -32,7 +32,7 @@ export class MayorMenorComponent implements OnInit {
   }
 
   generarNextCarta(){
-    if(this.cartas.length > 44){
+    if(this.cartas.length > 40){
       const indiceRand = this.numeroRandom(0, this.cartas.length - 1);
       this.nextCarta = this.cartas[indiceRand];
       this.cartas.splice(indiceRand, 1);

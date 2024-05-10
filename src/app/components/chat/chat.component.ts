@@ -14,12 +14,14 @@ import { NavbarComponent } from '../navbar/navbar.component';
   styleUrl: './chat.component.css'
 })
 export class ChatComponent implements OnInit{
-  chatMessages!: any[];
+  chatMessages: any[] = [];
   message!: string;
   userId: any;
+  user: any;
   constructor(private chatService: ChatService, private userService: UsersService) { }
 
   ngOnInit(): void {
+
     this.chatService.getMensajes().subscribe(chat => {
       this.chatMessages = chat;
       this.formatDates();
@@ -31,6 +33,8 @@ export class ChatComponent implements OnInit{
       setTimeout(() => {
         this.scroll();
       }, 0);
+
+
       
     })
 
@@ -43,6 +47,14 @@ export class ChatComponent implements OnInit{
         this.userId = localStorage.getItem('userId');
       }
     })
+
+    this.userService.data$.subscribe(data => {
+      this.user = data;
+      if(data == null)
+      {
+          this.user = localStorage.getItem('email');
+      }
+    });
   }
 
 
@@ -54,7 +66,8 @@ export class ChatComponent implements OnInit{
     const message: ChatMessage = {
       message: this.message,
       created_at: new Date(),
-      userId: this.userId
+      userId: this.userId,
+      email: this.user
     }
     this.chatService.cargarMensaje(message);
     this.message = '';

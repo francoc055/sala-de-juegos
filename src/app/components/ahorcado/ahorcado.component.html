@@ -1,26 +1,38 @@
 <app-navbar></app-navbar>
 
-<div class="container mx-auto bg-gray-100 p-6 rounded-lg shadow-md mt-5">
-    <h1 class="text-3xl font-bold mb-4 text-center">Juego del Ahorcado</h1>
-    <div class="mb-4">
-        <p class="mb-2"><strong>Palabra:</strong> {{getPalabraDibujada()}}</p>
-        <p class="mb-2"><strong>Letras intentadas:</strong> {{letrasIntentadas}}</p>
-        <p class="mb-2"><strong>Intentos restantes:</strong> {{intentos}}</p>
-    </div>
-    <div class="flex items-center justify-between mb-4">
-        <p class="text-xl font-bold">Elegir letra: <span class="text-red-400">{{letras[indiceLetra]}}</span></p>
-        <div class="flex space-x-4">
-            <button (click)="letraUp()" class="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-md focus:outline-none focus:bg-purple-600">+</button>
-            <button (click)="letraDown()" class="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-md focus:outline-none focus:bg-purple-600">-</button>
+<h1 class="text-3xl font-bold mb-4 text-center m-2 text-gray-800">Juego del Ahorcado</h1>
+<div class="container mx-auto bg-gray-100 p-6 rounded-lg shadow-md mt-5 flex justify-between">
+    <div class="w-1/2">
+
+        <div class="mb-4">
+            <p class="mb-2"><strong>Palabra:</strong> {{getPalabraDibujada()}}</p>
+            <p class="mb-2"><strong>Intentos restantes:</strong> {{intentos}}</p>
+        </div>
+        <div>
+            <button *ngFor="let letra of teclado" (click)="presionarLetra(letra)"
+            [disabled]="pressedLetters.includes(letra)"  
+            class="px-3 py-1 border bg-neutral-300 rounded-md m-1"
+            [ngClass]="(pressedLetters.includes(letra)) ? 'bg-red-400' : ''"
+            >
+            {{letra}}
+        </button>
+        </div>
+        <div class="mt-4">
+            <h2 *ngIf="getPalabraDibujada() == palabra" class="text-green-500 font-bold mb-2 text-center">¡Ganaste!</h2>
+            <div *ngIf="intentos === 0" class="text-center">
+                <h2 class="text-red-500 font-bold mb-2">¡Perdiste!</h2>
+                <p class="mb-2">La palabra era: <span class="text-gray-800 font-bold">{{palabra}}</span></p>
+                <button (click)="reiniciarJuego()" class="bg-gray-800 hover:bg-gray-600 text-white py-2 px-1 rounded-md focus:outline-none">Reiniciar</button>
+            </div>
         </div>
     </div>
-    <button (click)="intentarLetra()" class="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-md focus:outline-none focus:bg-purple-600">Intentar</button>
-    <div class="mt-4">
-        <h2 *ngIf="getPalabraDibujada() == palabra" class="text-green-500 font-bold mb-2 text-center">¡Ganaste!</h2>
-        <div *ngIf="intentos === 0" class="text-center">
-            <h2 class="text-red-500 font-bold mb-2">¡Perdiste!</h2>
-            <p class="mb-2">La palabra era: {{palabra}}</p>
-            <button (click)="reiniciarJuego()" class="bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-md focus:outline-none focus:bg-purple-600">Reiniciar</button>
-        </div>
+    <div>
+        <img *ngIf="intentos === 6" src="./../../../assets/game-ahorcado/ahorcado-base.png" alt="ahorcado">
+        <img *ngIf="intentos === 5" src="./../../../assets/game-ahorcado/ahorcado-cabeza.png" alt="ahorcado">
+        <img *ngIf="intentos === 4" src="./../../../assets/game-ahorcado/ahorcado-torso.png" alt="ahorcado">
+        <img *ngIf="intentos === 3" src="./../../../assets/game-ahorcado/ahorcado-brazoI.png" alt="ahorcado">
+        <img *ngIf="intentos === 2" src="./../../../assets/game-ahorcado/ahorcado-brazoD.png" alt="ahorcado">
+        <img *ngIf="intentos === 1" src="./../../../assets/game-ahorcado/ahorcado-piernaI.png" alt="ahorcado">
+        <img *ngIf="intentos === 0" src="./../../../assets/game-ahorcado/ahorcado.png" alt="ahorcado">
     </div>
 </div>

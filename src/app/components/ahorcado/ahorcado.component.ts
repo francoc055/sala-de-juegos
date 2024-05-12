@@ -17,8 +17,9 @@ export class AhorcadoComponent implements OnInit{
   intentos: any = 6;
   letrasIntentadas: string = '';
   palabraArray: string[] = [];
-  letras: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   indiceLetra: any = 0;
+  teclado: string[]= ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  pressedLetters: string[] = [];
 
   constructor() { }
 
@@ -26,10 +27,10 @@ export class AhorcadoComponent implements OnInit{
     this.dibujarPalabra();
   }
 
-  intentarLetra(): void {
+  intentarLetra(letra: any): void {
     this.palabraArray = this.palabra.split("");
-    if (this.letras[this.indiceLetra] && this.palabraArray.includes(this.letras[this.indiceLetra])) {
-      this.agregarLetra();
+    if (letra && this.palabraArray.includes(letra)) {
+      this.agregarLetra(letra);
     }
     else{
       this.intentos--;
@@ -46,10 +47,10 @@ export class AhorcadoComponent implements OnInit{
     return this.palabraDibujada.toString().replace(/,/g, '')
   }
 
-  agregarLetra(){
+  agregarLetra(letra: any){
     for(let i = 0; i < this.palabraArray.length; i++){
-      if(this.palabraArray[i] == this.letras[this.indiceLetra]){
-        this.palabraDibujada[i] = this.letras[this.indiceLetra];
+      if(this.palabraArray[i] == letra){
+        this.palabraDibujada[i] = letra;
       }
     }
   }
@@ -58,21 +59,14 @@ export class AhorcadoComponent implements OnInit{
     this.palabraDibujada = [];
     this.dibujarPalabra();
     this.intentos = 6;
+    this.pressedLetters.length = 0;
   }
 
-  letraUp(){
-    if(this.indiceLetra == this.letras.length - 1){
-      this.indiceLetra = 0;
-      return
-    }
-    this.indiceLetra++;
-  }
 
-  letraDown(){
-    if(this.indiceLetra == 0){
-      this.indiceLetra = this.letras.length - 1;
-      return
+  presionarLetra(letra: any){
+    if (!this.pressedLetters.includes(letra)) {
+      this.pressedLetters.push(letra);
+      this.intentarLetra(letra);
     }
-    this.indiceLetra--;
   }
 }

@@ -1,40 +1,27 @@
 <app-navbar></app-navbar>
 
-<h1 class="text-4xl font-bold text-center text-neutral-700">Mayor o Menor</h1>
+<h1 class="text-4xl font-bold text-center text-gray-800">Mayor o Menor</h1>
 
 <div class="w-full flex justify-center items-center p-4 rounded-2xl">
-    <div class="flex justify-center bg-slate-100 shadow-xl w-4/5">
-        <div class="w-48 h-72 bg-slate-300 rounded-lg shadow-lg flex justify-center items-center relative m-5">
-            <div class="w-44 h-64 bg-gray-700 rounded-lg flex justify-center items-center relative">
-              <div class="absolute inset-0 bg-gray-900 opacity-75 rounded-lg"></div>
-              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gray-900 rounded-full"></div>
-              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-36 h-56 bg-gray-900 border-4 border-gray-600 rounded-lg"></div>
-            </div>
-        </div>
+    <div class="flex flex-col justify-center items-center bg-slate-100 shadow-xl w-4/5 p-5">
+        <img src="{{path}}" alt="card" width="150" height="150">
         
-        <div class="flex flex-col justify-center">
-            <p class="text-center text-lg">{{preguntas[randomNum]}}</p>
-            <button (click)="respuestafirmativa()" class="m-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md focus:outline-none focus:bg-blue-600">Si</button>
-            <button (click)="respuestaNegativa()" class="m-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md focus:outline-none focus:bg-blue-600">No</button>
+        <div class="flex justify-center m-5">
+            <button (click)="mayor()" class="m-2 px-4 py-2 bg-gray-800 hover:bg-gray-600 text-white rounded-md focus:outline-none">Mayor</button>
+            <button (click)="menor()" class="m-2 px-4 py-2 bg-gray-800 hover:bg-gray-600 text-white rounded-md focus:outline-none">Menor</button>
         </div>
     
     
-        <div class="w-48 h-72 bg-zinc-100 rounded-lg shadow-2xl flex justify-center items-center relative m-5">
-            <div class=" w-44 h-64 rounded-lg border-red-400 border-2 bg-slate-100"> 
-                <p class="text-2xl p-3">{{numeroCarta}}</p>
-                <div class="flex justify-center items-center h-full w-full">
-                    <h2>Cartas españolas</h2>
-                </div>
-            </div>
-        </div>
+
     
     </div>
 </div>
 
-<div *ngIf="mostrarPuntos" class="flex flex-col justify-center items-center">
-    <h3 class="text-xl text-green-500 text-center p-5">Puntos ganados: {{puntos}}</h3>
+<div *ngIf="intentos == 0" class="flex flex-col justify-center items-center">
+    <h3 class="text-xl text-green-500 text-center p-5">Intentos terminados, Puntos ganados: {{puntos}}</h3>
     <button (click)="reiniciarJuego()" class="p-2 bg-red-400 rounded-md">Reiniciar juego</button>
 </div>
+
 
 
 

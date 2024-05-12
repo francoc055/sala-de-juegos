@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { MayorMenorService } from '../../services/mayor-menor.service';
+import { TitleStrategy } from '@angular/router';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -11,79 +13,62 @@ import { NavbarComponent } from '../navbar/navbar.component';
   styleUrl: './mayor-menor.component.css'
 })
 export class MayorMenorComponent implements OnInit {
-  mostrar: boolean = false;
-  numeroComparable: any;
-  numeroCarta: Number = 1;
-  cartas: any= [1,2,3,4,5,6,7,8,9,10,11,12,
-                1,2,3,4,5,6,7,8,9,10,11,12,
-                1,2,3,4,5,6,7,8,9,10,11,12,
-                1,2,3,4,5,6,7,8,9,10,11,12]
-  repeticionNumeros: number[] = [];
+
   puntos: any = 0;
   mostrarPuntos: boolean = false;
-  preguntas: string[] = ['Es mayor?', 'Es menor?'];
-  randomNum: any;
-  nextCarta: any;
+  cartas: any[] = [];
+  path: string = '';
+  id_new: any;
+  indice: any = this.numeroRandom(0, 51);
+  intentos: any = 3;
 
-  mostrarCartaFrontal() {
-      const indiceRand = this.numeroRandom(0, this.cartas.length - 1);
-      this.numeroCarta = this.cartas[indiceRand];
-      this.randomNum = this.numeroRandom(0, 1)
+
+  constructor(private mnService: MayorMenorService){}
+
+  nextCard(){
+    this.indice = this.numeroRandom(0, 51);
+    this.path = this.cartas[this.indice].image;
+    switch(this.cartas[this.indice].value){
+      case 'KING':
+      case 'QUEEN':
+      case 'JACK':
+        return 10;
+      break;
+      case 'ACE':
+        return 11;
+      break;
+      default:
+        return this.cartas[this.indice].value;
+    }
   }
 
-  generarNextCarta(){
-    if(this.cartas.length > 40){
-      const indiceRand = this.numeroRandom(0, this.cartas.length - 1);
-      this.nextCarta = this.cartas[indiceRand];
-      this.cartas.splice(indiceRand, 1);
+  mayor(){
+    const numero =  this.cartas[this.indice].value;
+    const nextNumber = this.nextCard();
+    console.log(nextNumber);
+    if(numero > nextNumber){
+      this.puntos++;
+      alert('acertaste!');
     }
-    else{
-      this.mostrarPuntos = true;
-      console.log('Puntos ganados', this.puntos)
+    else
+    {
+      this.intentos--;
     }
   }
 
-  respuestafirmativa(){
-      this.generarNextCarta();
-      if(this.randomNum === 0 && this.numeroCarta > this.nextCarta){
-        this.puntos++;
-      }
-      else if(this.randomNum === 1 && this.numeroCarta < this.nextCarta){
-        this.puntos++;
-      }
-    this.numeroCarta = this.nextCarta;
-    this.randomNum = this.numeroRandom(0, 1)
-
-
-  } 
-
-  respuestaNegativa(){
-    this.generarNextCarta();
-      if(this.randomNum === 0 && this.numeroCarta < this.nextCarta){
-        this.puntos++;
-      }
-      else if(this.randomNum === 1 && this.numeroCarta > this.nextCarta){
-        this.puntos++;
-      }
-    this.numeroCarta = this.nextCarta;
-    this.randomNum = this.numeroRandom(0, 1)
-
-
-    
-  }
-
-  mayor(): boolean{
-    if(this.numeroComparable < this.numeroCarta){
-      return true;
+  menor(){
+    const numero =  this.cartas[this.indice].value;
+    console.log(numero);
+    const nextNumber = this.nextCard();
+    console.log(nextNumber);
+    if(numero < nextNumber){
+      this.puntos++;
+      alert('acertaste!');
     }
-    return false
-  }
-
-  menor(): boolean{
-    if(this.numeroComparable > this.numeroCarta){
-      return true;
+    else
+    {
+      this.intentos--;
     }
-    return false;
   }
 
 
@@ -92,20 +77,28 @@ export class MayorMenorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.randomNum = this.numeroRandom(0, 1)
-    this.mostrarCartaFrontal();
-    // this.numeroComparable = this.numeroCarta;
+
+    this.mnService.newMazo()
+    .subscribe((response: any) => {
+      this.id_new = response.deck_id;
+    });
+
+    setTimeout(() => {
+      this.mnService.getCartas(this.id_new)
+      .subscribe((response: any) => {
+        this.cartas = response.cards;
+        console.log(this.cartas);
+        // console.log(this.indice);
+        this.path = this.cartas[this.indice].image;
+      });
+    }, 1000);
+
   }
 
   reiniciarJuego(){
     this.puntos = 0;
-    this.mostrarPuntos = false;
-    this.cartas = [1,2,3,4,5,6,7,8,9,10,11,12,
-                  1,2,3,4,5,6,7,8,9,10,11,12,
-                  1,2,3,4,5,6,7,8,9,10,11,12,
-                  1,2,3,4,5,6,7,8,9,10,11,12];
-
-    this.mostrarCartaFrontal();
+    this.intentos = 3;
+    this.nextCard();
   }
 
 }

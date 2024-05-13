@@ -45,7 +45,6 @@ export class MayorMenorComponent implements OnInit {
   mayor(){
     const numero =  this.cartas[this.indice].value;
     const nextNumber = this.nextCard();
-    console.log(nextNumber);
     if(numero > nextNumber){
       this.puntos++;
       alert('acertaste!');
@@ -58,9 +57,7 @@ export class MayorMenorComponent implements OnInit {
 
   menor(){
     const numero =  this.cartas[this.indice].value;
-    console.log(numero);
     const nextNumber = this.nextCard();
-    console.log(nextNumber);
     if(numero < nextNumber){
       this.puntos++;
       alert('acertaste!');

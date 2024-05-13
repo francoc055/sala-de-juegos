@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+
+<div class="p-10">
+    <div *ngIf="preguntas.length > 0" class="max-w-screen-sm mx-auto bg-gray-300 rounded-md shadow-xl p-5">
+      <h1 class="font-bold text-2xl text-center">{{preguntas[indice].question}}</h1>
+      <form #form="ngForm">
+
+          <div *ngIf="preguntas[indice].type == 'boolean'" class="mt-4 text-center flex flex-col justify-center items-center">
+            <label class="my-2 p-3 bg-white w-1/2 rounded-md cursor-pointer duration-500 hover:bg-gray-400 hover:text-white">
+              <input [(ngModel)]="seleccion" (change)="onChange()" name="{{preguntas[indice].correct_answer}}" type="radio" value="{{preguntas[indice].correct_answer}}"/>
+              {{preguntas[indice].correct_answer}}
+            </label>
+            <label class="my-2 p-3 bg-white w-1/2 rounded-md cursor-pointer duration-500 hover:bg-gray-400 hover:text-white">
+                <input [(ngModel)]="seleccion" (change)="onChange()" name="{{preguntas[indice].incorrect_answers[0]}}" type="radio" value="{{preguntas[indice].incorrect_answers[0]}}"/>
+                {{preguntas[indice].incorrect_answers[0]}}
+            </label>
+        </div>
+          <div *ngIf="preguntas[indice].type == 'multiple'" class="mt-4 text-center flex flex-col justify-center items-center">
+            <label class="my-2 p-3 bg-white w-1/2 rounded-md cursor-pointer duration-500 hover:bg-gray-400 hover:text-white">
+              <input [(ngModel)]="seleccion" (change)="onChange()" name="{{preguntas[indice].incorrect_answers[0]}}" type="radio" value="{{preguntas[indice].incorrect_answers[0]}}" class="focus:bg-red-400"/>
+              {{preguntas[indice].incorrect_answers[0]}}
+            </label>
+            <label class="my-2 p-3 bg-white w-1/2 rounded-md cursor-pointer duration-500 hover:bg-gray-400 hover:text-white">
+                <input [(ngModel)]="seleccion" (change)="onChange()" name="{{preguntas[indice].correct_answer}}" type="radio" value="{{preguntas[indice].correct_answer}}" class="focus:bg-red-400"/>
+                {{preguntas[indice].correct_answer}}
+            </label>
+            <label class="my-2 p-3 bg-white w-1/2 rounded-md cursor-pointer duration-500 hover:bg-gray-400 hover:text-white">
+                <input [(ngModel)]="seleccion" (change)="onChange()" name="{{preguntas[indice].incorrect_answers[1]}}" type="radio" value="{{preguntas[indice].incorrect_answers[1]}}" class="focus:bg-red-400"/>
+                {{preguntas[indice].incorrect_answers[1]}}
+            </label>
+            <label class="my-2 p-3 bg-white w-1/2 rounded-md cursor-pointer duration-500 hover:bg-gray-400 hover:text-white">
+                <input [(ngModel)]="seleccion" (change)="onChange()" name="{{preguntas[indice].incorrect_answers[2]}}" type="radio" value="{{preguntas[indice].incorrect_answers[2]}}" class="focus:bg-red-400"/>
+                {{preguntas[indice].incorrect_answers[2]}}
+            </label>
+          </div>
+      </form>
+    </div>
+</div>
+
+<div *ngIf="tiempoRestante !== 0">
+    <h3 [ngClass]="(tiempoRestante <= 3) ? 'text-red-500' : 'text-green-500'" class="text-center font-bold text-5xl">
+        {{tiempoRestante}}
+    </h3>
+</div>
+
+<div *ngIf="mostrarPuntos" class="m-3">
+    <h3 class="text-3xl text-center p-2">Resultado: <span class="font-bold text-gray-800">{{puntos}}</span> puntos</h3>
+    <button class="p-2 bg-red-400 rounded-md text-center" (click)="reiniciarJuego()">Reinicia juego</button>
+</div>

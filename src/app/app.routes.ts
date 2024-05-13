@@ -11,6 +11,7 @@ export const routes: Routes = [
     { path: 'chat', loadComponent:() => import('./components/chat/chat.component').then( m => m.ChatComponent),  canActivate: [authGuard] },
     { path: 'ahorcado', loadComponent:() => import('./components/ahorcado/ahorcado.component').then( m => m.AhorcadoComponent),  canActivate: [authGuard] },
     { path: 'mayorMenor', loadComponent:() => import('./components/mayor-menor/mayor-menor.component').then( m => m.MayorMenorComponent), canActivate: [authGuard]},
+    { path: 'preguntados', loadComponent:() => import('./components/preguntados/preguntados.component').then( m => m.PreguntadosComponent)},
 
 
 ];

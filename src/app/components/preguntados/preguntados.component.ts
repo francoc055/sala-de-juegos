@@ -101,6 +101,7 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
   reiniciarJuego(){
     this.mostrarPuntos = false;
     this.puntos = 0;
+    this.tiempoRestante = this.tiempoInicial;
     this.inicializar();
   }
 }

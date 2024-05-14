@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<div class="w-full flex flex-col justify-center items-center">
+    <h1 class="text-5xl p-5 text-white font-bold">Buscaminas</h1>
+        <div class="grid grid-cols-5 p-5 shadow-xl rounded">
+            <ng-container *ngFor="let fila of tablero; let i = index">
+                <ng-container *ngFor="let casilla of fila; let j = index">
+                    <button 
+                        (click)="destaparCasilla(i, j)"
+                        [ngClass]="{
+                        'bg-gray-200': casilla.mostrar === '',
+                        'bg-blue-400': casilla.mostrar === 'X',
+                        'bg-gray-400': casilla.mostrar !== '' && !casilla.mina,
+                        'bg-red-500': casilla.mostrar !== '' && casilla.mina
+                        }"
+                        class="w-10 h-10 border border-gray-300 flex items-center justify-center text-sm duration-200 hover:bg-slate-300">
+                        {{ casilla.mostrar }}
+                    </button>
+                </ng-container>
+            </ng-container>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
-<h1 class="text-3xl font-bold mb-4 text-center m-2 text-gray-800">Juego del Ahorcado</h1>
-<div class="container mx-auto bg-gray-100 p-6 rounded-lg shadow-md mt-5 flex justify-between">
+<h1 class="text-3xl font-bold mb-4 text-center m-2 text-white p-5">Juego del Ahorcado</h1>
+<div class="w-2/3 mx-auto bg-gray-700 p-6 rounded-lg shadow-md mt-5 flex flex-wrap justify-between">
     <div class="w-1/2">
 
         <div class="mb-4">
@@ -21,7 +21,7 @@
             <h2 *ngIf="getPalabraDibujada() == palabra" class="text-green-500 font-bold mb-2 text-center">¡Ganaste!</h2>
             <div *ngIf="intentos === 0" class="text-center">
                 <h2 class="text-red-500 font-bold mb-2">¡Perdiste!</h2>
-                <p class="mb-2">La palabra era: <span class="text-gray-800 font-bold">{{palabra}}</span></p>
+                <p class="mb-2">La palabra era: <span class="text-white font-bold">{{palabra}}</span></p>
                 <button (click)="reiniciarJuego()" class="bg-gray-800 hover:bg-gray-600 text-white py-2 px-1 rounded-md focus:outline-none">Reiniciar</button>
             </div>
         </div>

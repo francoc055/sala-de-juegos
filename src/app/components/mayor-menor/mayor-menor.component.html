@@ -1,28 +1,24 @@
 <app-navbar></app-navbar>
 
-<h1 class="text-4xl font-bold text-center text-gray-800">Mayor o Menor</h1>
-
-<div class="w-full flex justify-center items-center p-4 rounded-2xl">
-    <div class="flex flex-col justify-center items-center bg-slate-100 shadow-xl w-4/5 p-5">
-        <img src="{{path}}" alt="card" width="150" height="150">
-        
-        <div class="flex justify-center m-5">
-            <button (click)="mayor()" class="m-2 px-4 py-2 bg-gray-800 hover:bg-gray-600 text-white rounded-md focus:outline-none">Mayor</button>
-            <button (click)="menor()" class="m-2 px-4 py-2 bg-gray-800 hover:bg-gray-600 text-white rounded-md focus:outline-none">Menor</button>
+<h1 class="text-5xl font-bold text-center text-white-800 p-5">Mayor o Menor</h1>
+<div class="w-full flex justify-center items-center">
+    <div class="w-1/2 flex flex-col justify-center items-center p-4 rounded-2xl">
+        <div class="flex flex-col justify-center items-center bg-gray-700 rounded-xl shadow-xl w-4/5 p-5">
+            <img src="{{path}}" alt="card" width="120" height="120">
+            
+            <div class="flex justify-center m-5">
+                <button (click)="mayor()" class="m-2 px-4 py-2 bg-white hover:bg-gray-300 rounded-md focus:outline-none">Mayor</button>
+                <button (click)="menor()" class="m-2 px-4 py-2 bg-white hover:bg-gray-300 rounded-md focus:outline-none">Menor</button>
+            </div>
         </div>
-    
-    
-
-    
+        <div *ngIf="intentos == 0" class="flex flex-col justify-center items-center p-3">
+            <h3 class="text-xl text-white text-center p-5">Intentos terminados, Puntos ganados: {{puntos}}</h3>
+            <button (click)="reiniciarJuego()" class="p-2 bg-red-400 rounded-md">Reiniciar juego</button>
+        </div>
     </div>
 </div>
 
-<div *ngIf="intentos == 0" class="flex flex-col justify-center items-center">
-    <h3 class="text-xl text-green-500 text-center p-5">Intentos terminados, Puntos ganados: {{puntos}}</h3>
-    <button (click)="reiniciarJuego()" class="p-2 bg-red-400 rounded-md">Reiniciar juego</button>
-</div>
 
 
 
 
-  

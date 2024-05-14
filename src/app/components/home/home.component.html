@@ -1,19 +1,33 @@
 <app-navbar [usuario]="receivedData"></app-navbar>
 
-<h1 class="text-3xl font-bold mb-4 text-center m-5 text-gray-800">Sala de juegos</h1>
+<h1 class="text-5xl font-bold mb-4 text-center m-5 text-white">Sala de juegos</h1>
 
 <div class="flex justify-evenly p-5 flex-wrap">
-  <div class="max-w-xs rounded overflow-hidden shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
-      <img routerLink="/ahorcado" routerLinkActive="font-bold" class="w-full h-auto" src="../../../assets/ahorcadoGame.png" alt="Imagen">
+  <div class="max-w-xs max-h-xs rounded-md overflow-hidden shadow-2xl transition duration-300 ease-in-out transform hover:scale-105">
+      <img routerLink="/ahorcado" routerLinkActive="font-bold"  src="../../../assets/ahorcadoGame.png" alt="Imagen">
       <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">El ahorcado</div>
+        <p class="font-bold text-xl mb-2">El ahorcado</p>
       </div>
   </div>
   
-  <div class="max-w-xs rounded overflow-hidden shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
-    <img routerLink="/mayorMenor" routerLinkActive="font-bold" class="w-full h-auto" src="../../../assets/cartas.png" alt="Imagen">
+  <div class="max-w-xs max-h-xs rounded-md overflow-hidden shadow-2xl transition duration-300 ease-in-out transform hover:scale-105">
+    <img routerLink="/mayorMenor" routerLinkActive="font-bold" src="../../../assets/cartas.png" alt="Imagen">
     <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">Mayor o Menor</div>
+      <p class="font-bold text-xl mb-2">Mayor o Menor</p>
+    </div>
+  </div>
+
+  <div class="max-w-xs max-h-xs rounded-md overflow-hidden shadow-2xl transition duration-300 ease-in-out transform hover:scale-105">
+    <img routerLink="/preguntados" routerLinkActive="font-bold"  src="../../../assets/preguntados.png" alt="Imagen">
+    <div class="px-6 py-4">
+      <p class="font-bold text-xl mb-2">Preguntados</p>
+    </div>
+  </div>
+
+  <div class="max-w-xs max-h-xs rounded-md overflow-hidden shadow-2xl transition duration-300 ease-in-out transform hover:scale-105">
+    <img routerLink="/buscaminas" routerLinkActive="font-bold"  src="../../../assets/buscaminas.jpg" alt="Imagen">
+    <div class="px-6 py-4">
+      <p class="font-bold text-xl mb-2">Buscaminas</p>
     </div>
   </div>
 </div>

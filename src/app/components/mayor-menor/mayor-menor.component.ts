@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MayorMenorService } from '../../services/mayor-menor.service';
 import { TitleStrategy } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -47,11 +48,18 @@ export class MayorMenorComponent implements OnInit {
     const nextNumber = this.nextCard();
     if(numero > nextNumber){
       this.puntos++;
-      alert('acertaste!');
+      Swal.fire({
+        text: "Acertaste!",
+        icon: "success"
+      });
     }
     else
     {
       this.intentos--;
+      Swal.fire({
+        text: "Erraste!",
+        icon: "error"
+      });
     }
   }
 
@@ -60,11 +68,18 @@ export class MayorMenorComponent implements OnInit {
     const nextNumber = this.nextCard();
     if(numero < nextNumber){
       this.puntos++;
-      alert('acertaste!');
+      Swal.fire({
+        text: "Acertaste!",
+        icon: "success"
+      });
     }
     else
     {
       this.intentos--;
+      Swal.fire({
+        text: "Erraste!",
+        icon: "error"
+      });
     }
   }
 
